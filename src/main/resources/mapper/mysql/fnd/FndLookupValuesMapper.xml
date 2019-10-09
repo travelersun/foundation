@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndLookupValuesMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT
+            `LOOKUP_TYPE`,
+            `LOOKUP_CODE`,
+            `SECURITY_GROUP_ID`,
+            `VIEW_APPLICATION_ID`,
+            `MEANING`,
+            `DESCRIPTION`,
+            `ENABLED_FLAG`,
+            `START_DATE_ACTIVE`,
+            `END_DATE_ACTIVE`,
+            `TAG`,
+            `LEAF_NODE`,
+            `ATTRIBUTE_CATEGORY`,
+            `ATTRIBUTE1`,
+            `ATTRIBUTE2`,
+            `ATTRIBUTE3`,
+            `ATTRIBUTE4`,
+            `ATTRIBUTE5`,
+            `ATTRIBUTE6`,
+            `ATTRIBUTE7`,
+            `ATTRIBUTE8`,
+            `ATTRIBUTE9`,
+            `ATTRIBUTE10`,
+            `ATTRIBUTE11`,
+            `ATTRIBUTE12`,
+            `ATTRIBUTE13`,
+            `ATTRIBUTE14`,
+            `ATTRIBUTE15`,
+            `CREATED_BY`,
+            `CREATION_DATE`,
+            `LAST_UPDATED_BY`,
+            `LAST_UPDATE_DATE`
+        FROM `FND_LOOKUP_VALUES`
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

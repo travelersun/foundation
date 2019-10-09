@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndRespFunctionsMapper">
+
+    <select id="selectRespFunByRespId" parameterType="java.lang.Long" resultType="map">
+        SELECT RESPONSIBILITY_ID,ACTION_ID,RULE_TYPE FROM FND_RESP_FUNCTIONS
+        where RESPONSIBILITY_ID = #{value}
+    </select>
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+
+        SELECT
+            `EXCLUSION_ID`,
+            `APPLICATION_ID`,
+            `RESPONSIBILITY_ID`,
+            `ACTION_ID`,
+            case
+                when a.RULE_TYPE='M' then ( SELECT MENU_NAME FROM FND_MENUS where MENU_ID = a.ACTION_ID)
+                when a.RULE_TYPE='F' then ( SELECT FUNCTION_NAME FROM FND_FUNCTIONS where FUNCTION_ID = a.ACTION_ID )
+                else ''
+            end as `ACTION_NAME`,
+            `RULE_TYPE`,
+            `LAST_UPDATE_DATE`,
+            `LAST_UPDATED_BY`,
+            `CREATION_DATE`,
+            `CREATED_BY`
+        FROM `FND_RESP_FUNCTIONS` a
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

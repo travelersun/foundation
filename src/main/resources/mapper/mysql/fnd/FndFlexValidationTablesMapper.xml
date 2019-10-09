@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndFlexValidationTablesMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT
+            `FLEX_VALUE_SET_ID`,
+            `APPLICATION_TABLE_NAME`,
+            `VALUE_COLUMN_NAME`,
+            `VALUE_COLUMN_TYPE`,
+            `VALUE_COLUMN_SIZE`,
+            `COMPILED_ATTRIBUTE_COLUMN_NAME`,
+            `ENABLED_COLUMN_NAME`,
+            `HIERARCHY_LEVEL_COLUMN_NAME`,
+            `START_DATE_COLUMN_NAME`,
+            `END_DATE_COLUMN_NAME`,
+            `SUMMARY_ALLOWED_FLAG`,
+            `SUMMARY_COLUMN_NAME`,
+            `ID_COLUMN_NAME`,
+            `ID_COLUMN_SIZE`,
+            `ID_COLUMN_TYPE`,
+            `MEANING_COLUMN_NAME`,
+            `MEANING_COLUMN_SIZE`,
+            `MEANING_COLUMN_TYPE`,
+            `TABLE_APPLICATION_ID`,
+            (SELECT APPLICATION_SHORT_NAME FROM FND_APPLICATION where APPLICATION_ID = a.TABLE_APPLICATION_ID) as `APPLICATION_NAME`,
+            `ADDITIONAL_QUICKPICK_COLUMNS`,
+            `ADDITIONAL_WHERE_CLAUSE`,
+            `LAST_UPDATE_DATE`,
+            `LAST_UPDATED_BY`,
+            `CREATION_DATE`,
+            `CREATED_BY`
+        FROM `FND_FLEX_VALIDATION_TABLES` a
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

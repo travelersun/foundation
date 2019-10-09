@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndResponsibilityMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT * FROM
+         (
+            SELECT
+                a.`RESPONSIBILITY_ID`,
+                a.`APPLICATION_ID`,
+                b.`APPLICATION_SHORT_NAME`,
+                a.`RESPONSIBILITY_NAME`,
+                a.`RESPONSIBILITY_KEY`,
+                a.`MENU_ID`,
+                c.`MENU_NAME`,
+                a.`REQUEST_GROUP_ID`,
+                a.`DATA_GROUP_ID`,
+                a.`DATA_GROUP_APPLICATION_ID`,
+                a.`GROUP_APPLICATION_ID`,
+                a.`START_DATE`,
+                a.`END_DATE`,
+                a.`VERSION`,
+                a.`RESPONSIBILITY_DESCRIPTION`,
+                a.`LAST_UPDATE_DATE`,
+                a.`LAST_UPDATED_BY`,
+                a.`CREATION_DATE`,
+                a.`CREATED_BY`
+            FROM `FND_RESPONSIBILITY` a left join FND_APPLICATION b on a.APPLICATION_ID = b.APPLICATION_ID
+            left join FND_MENUS c on a.MENU_ID = c.MENU_ID
+
+         ) T
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.HrAllOrganizationUnitsMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT * FROM
+        (
+        SELECT
+            a.`ORGANIZATION_ID`,
+            a.`BUSINESS_GROUP_ID`,
+            a.`NAME`,
+            a.`COST_ALLOCATION_KEYFLEX_ID`,
+            a.`LOCATION_ID`,
+            b.LOCATION_CODE as LOCATION_CODE,
+            b.ADDRESS_LINE_1 as ADDRESS_LINE_1,
+            a.`DATE_FROM`,
+            a.`DATE_TO`,
+            a.`INTERNAL_EXTERNAL_FLAG`,
+            a.`INTERNAL_ADDRESS_LINE`,
+            a.`TYPE`,
+            a.`REQUEST_ID`,
+            a.`PROGRAM_APPLICATION_ID`,
+            a.`PROGRAM_ID`,
+            a.`PROGRAM_UPDATE_DATE`,
+            a.`OBJECT_VERSION_NUMBER`,
+            a.`PARTY_ID`,
+            a.`COMMENTS`,
+            a.`LAST_UPDATE_DATE`,
+            a.`LAST_UPDATED_BY`,
+            a.`CREATED_BY`,
+            a.`CREATION_DATE`,
+            a.`ATTRIBUTE_CATEGORY`,
+            a.`ATTRIBUTE1`,
+            a.`ATTRIBUTE2`,
+            a.`ATTRIBUTE3`,
+            a.`ATTRIBUTE4`,
+            a.`ATTRIBUTE5`,
+            a.`ATTRIBUTE6`,
+            a.`ATTRIBUTE7`,
+            a.`ATTRIBUTE8`,
+            a.`ATTRIBUTE9`,
+            a.`ATTRIBUTE10`,
+            a.`ATTRIBUTE11`,
+            a.`ATTRIBUTE12`,
+            a.`ATTRIBUTE13`,
+            a.`ATTRIBUTE14`,
+            a.`ATTRIBUTE15`,
+            a.`ATTRIBUTE16`,
+            a.`ATTRIBUTE17`,
+            a.`ATTRIBUTE18`,
+            a.`ATTRIBUTE19`,
+            a.`ATTRIBUTE20`,
+            a.`ATTRIBUTE21`,
+            a.`ATTRIBUTE22`,
+            a.`ATTRIBUTE23`,
+            a.`ATTRIBUTE24`,
+            a.`ATTRIBUTE25`,
+            a.`ATTRIBUTE26`,
+            a.`ATTRIBUTE27`,
+            a.`ATTRIBUTE28`,
+            a.`ATTRIBUTE29`,
+            a.`ATTRIBUTE30`
+        FROM `HR_ALL_ORGANIZATION_UNITS` a left join `HR_LOCATIONS_ALL` b on a.LOCATION_ID = b.LOCATION_ID
+        ) T
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

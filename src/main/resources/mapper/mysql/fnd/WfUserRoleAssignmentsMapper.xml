@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.WfUserRoleAssignmentsMapper">
+    
+    <select id="selectRespByRoles" parameterType="java.util.List" resultType="map">
+        select b.RESPONSIBILITY_ID,b.RESPONSIBILITY_KEY,b.RESPONSIBILITY_NAME,b.MENU_ID from WF_ROLE_HIERARCHIES a,FND_RESPONSIBILITY b
+        where a.SUB_NAME = b.RESPONSIBILITY_KEY
+        and (a.ENABLED_FLAG = 'Y' or a.ENABLED_FLAG is null)
+        <if test="list != null and list.size()>0 ">
+            and SUPER_NAME in
+            <foreach collection="list" index="i" item="e" open="(" separator="," close=")">
+                #{e}
+            </foreach>
+        </if>
+        order by b.RESPONSIBILITY_KEY
+    </select>
+
+    <select id="selectRespByUserId" parameterType="java.lang.String" resultType="map">
+        SELECT b.RESPONSIBILITY_ID,b.RESPONSIBILITY_KEY,b.RESPONSIBILITY_NAME,b.MENU_ID FROM WF_USER_ROLE_ASSIGNMENTS a, FND_RESPONSIBILITY b
+        where a.ROLE_NAME = b.RESPONSIBILITY_KEY
+
+        and (a.USER_NAME = #{value})
+
+        order by b.RESPONSIBILITY_KEY
+    </select>
+
+</mapper>

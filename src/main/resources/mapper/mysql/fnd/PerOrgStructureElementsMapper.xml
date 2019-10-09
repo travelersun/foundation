@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.PerOrgStructureElementsMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT * FROM
+          (
+            SELECT
+                a.`ORG_STRUCTURE_ELEMENT_ID`,
+                a.`BUSINESS_GROUP_ID`,
+                a.`ORGANIZATION_ID_PARENT`,
+                b.NAME as `ORGANIZATION_NAME_PARENT`,
+                b.TYPE as `ORGANIZATION_TYPE_PARENT`,
+                a.`ORG_STRUCTURE_ID`,
+                a.`ORG_STRUCTURE_VERSION_ID`,
+                a.`ORGANIZATION_ID_CHILD`,
+                c.NAME as `ORGANIZATION_NAME_CHILD`,
+                c.TYPE as `ORGANIZATION_TYPE_CHILD`,
+                a.`REQUEST_ID`,
+                a.`PROGRAM_APPLICATION_ID`,
+                a.`PROGRAM_ID`,
+                a.`PROGRAM_UPDATE_DATE`,
+                a.`OBJECT_VERSION_NUMBER`,
+                a.`POSITION_CONTROL_ENABLED_FLAG`,
+                a.`PARTY_ID`,
+                a.`LAST_UPDATE_DATE`,
+                a.`LAST_UPDATED_BY`,
+                a.`CREATED_BY`,
+                a.`CREATION_DATE`,
+                a.`ORDER_RANK`
+            FROM `PER_ORG_STRUCTURE_ELEMENTS` a left join HR_ALL_ORGANIZATION_UNITS b on a.ORGANIZATION_ID_PARENT = b.ORGANIZATION_ID
+                    left join HR_ALL_ORGANIZATION_UNITS c on a.ORGANIZATION_ID_CHILD = c.ORGANIZATION_ID
+            order by a.ORDER_RANK asc
+
+          ) T
+
+        ${wheresql}
+
+    </select>
+
+    <select id="querySubList"  resultType="map">
+        SELECT * FROM
+          (
+            SELECT
+                a.`ORG_STRUCTURE_ELEMENT_ID`,
+                a.`BUSINESS_GROUP_ID`,
+                a.`ORGANIZATION_ID_PARENT`,
+                b.NAME as `ORGANIZATION_NAME_PARENT`,
+                b.TYPE as `ORGANIZATION_TYPE_PARENT`,
+                a.`ORG_STRUCTURE_ID`,
+                a.`ORG_STRUCTURE_VERSION_ID`,
+                a.`ORGANIZATION_ID_CHILD`,
+                c.NAME as `ORGANIZATION_NAME_CHILD`,
+                c.TYPE as `ORGANIZATION_TYPE_CHILD`,
+                a.`REQUEST_ID`,
+                a.`PROGRAM_APPLICATION_ID`,
+                a.`PROGRAM_ID`,
+                a.`PROGRAM_UPDATE_DATE`,
+                a.`OBJECT_VERSION_NUMBER`,
+                a.`POSITION_CONTROL_ENABLED_FLAG`,
+                a.`PARTY_ID`,
+                a.`LAST_UPDATE_DATE`,
+                a.`LAST_UPDATED_BY`,
+                a.`CREATED_BY`,
+                a.`CREATION_DATE`,
+                a.`ORDER_RANK`
+            FROM `PER_ORG_STRUCTURE_ELEMENTS` a left join HR_ALL_ORGANIZATION_UNITS b on a.ORGANIZATION_ID_PARENT = b.ORGANIZATION_ID
+                    left join HR_ALL_ORGANIZATION_UNITS c on a.ORGANIZATION_ID_CHILD = c.ORGANIZATION_ID
+
+            WHERE a.ORG_STRUCTURE_ID = #{0} and a.ORGANIZATION_ID_PARENT = #{1}
+
+            order by a.ORDER_RANK asc
+
+          ) T
+
+    </select>
+
+    <select id="queryOrgListByStructId" parameterType="java.lang.Long" resultType="map">
+        SELECT * FROM
+          (
+            SELECT
+                a.`ORG_STRUCTURE_ELEMENT_ID`,
+                a.`BUSINESS_GROUP_ID`,
+                a.`ORGANIZATION_ID_PARENT`,
+                b.NAME as `ORGANIZATION_NAME_PARENT`,
+                b.TYPE as `ORGANIZATION_TYPE_PARENT`,
+                a.`ORG_STRUCTURE_ID`,
+                a.`ORG_STRUCTURE_VERSION_ID`,
+                a.`ORGANIZATION_ID_CHILD`,
+                c.NAME as `ORGANIZATION_NAME_CHILD`,
+                c.TYPE as `ORGANIZATION_TYPE_CHILD`,
+                a.`REQUEST_ID`,
+                a.`PROGRAM_APPLICATION_ID`,
+                a.`PROGRAM_ID`,
+                a.`PROGRAM_UPDATE_DATE`,
+                a.`OBJECT_VERSION_NUMBER`,
+                a.`POSITION_CONTROL_ENABLED_FLAG`,
+                a.`PARTY_ID`,
+                a.`LAST_UPDATE_DATE`,
+                a.`LAST_UPDATED_BY`,
+                a.`CREATED_BY`,
+                a.`CREATION_DATE`,
+                a.`ORDER_RANK`
+            FROM `PER_ORG_STRUCTURE_ELEMENTS` a left join HR_ALL_ORGANIZATION_UNITS b on a.ORGANIZATION_ID_PARENT = b.ORGANIZATION_ID
+                    left join HR_ALL_ORGANIZATION_UNITS c on a.ORGANIZATION_ID_CHILD = c.ORGANIZATION_ID
+            WHERE a.ORG_STRUCTURE_ID = #{value}
+            order by a.ORDER_RANK asc
+
+          ) T
+
+    </select>
+
+</mapper>

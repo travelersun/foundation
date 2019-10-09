@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndFunctionsMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT
+            `FUNCTION_ID`,
+            `FUNCTION_NAME`,
+            `FUNCTION_CODE`,
+            `APPLICATION_ID`,
+            (select `APPLICATION_SHORT_NAME` from `FND_APPLICATION` where `APPLICATION_ID` = a.`APPLICATION_ID`) as `APPLICATION_SHORT_NAME`,
+            `DESCRIPTION`,
+            `DIRECTION`,
+            `PARAMETERS`,
+            `TYPE`,
+            `WEB_HOST_NAME`,
+            `WEB_AGENT_NAME`,
+            `WEB_HTML_CALL`,
+            `WEB_ENCRYPT_PARAMETERS`,
+            `WEB_SECURED`,
+            `WEB_ICON`,
+            `OBJECT_ID`,
+            `CONTEXT_DEPENDENCE`,
+            `PATH`,
+            `COMPONENT`,
+            `HIDDEN`,
+            `METHOD_NAME`,
+            `COMPATIBILITY`,
+            `ASSOC_FUNCTION_NAME`,
+            `CLASS_ID`,
+            `SCHEMA_VALIDATION_FLAG`,
+            `CREATION_DATE`,
+            `CREATED_BY`,
+            `LAST_UPDATE_DATE`,
+            `LAST_UPDATED_BY`,
+            `SCHEMA`,
+            `PORT`,
+            `META`,
+            `REDIRECT`
+        FROM `FND_FUNCTIONS` a
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

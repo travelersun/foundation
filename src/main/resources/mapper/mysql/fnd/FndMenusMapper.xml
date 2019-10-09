@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndMenusMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+
+        SELECT
+            `MENU_ID`,
+            `MENU_NAME`,
+            `MENU_CODE`,
+            `PATH`,
+            `TYPE`,
+            `REDIRECT`,
+            `COMPONENT`,
+            `ALWAYS_SHOW`,
+            `DESCRIPTION`,
+            `META`,
+            `LAST_UPDATE_DATE`,
+            `LAST_UPDATED_BY`,
+            `CREATION_DATE`,
+            `CREATED_BY`
+        FROM `FND_MENUS`
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

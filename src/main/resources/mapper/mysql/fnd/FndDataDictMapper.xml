@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndDataDictMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+
+        SELECT
+            `FND_DATA_DICT_ID`,
+            `PRIMARY_KEY`,
+            `PRIMARY_VALUE`,
+            `SECONDARY_KEY`,
+            `SECONDARY_VALUE`,
+            `DISABLE`,
+            `ORDER_RANK`,
+            `PARANT_DATA_DICT_ID`,
+            `FILE_PATH_VALUE`,
+            `IMAGE_PATH_VALUE`,
+            `RICH_TEXT_VALUE`,
+            `CREATION_DATE`,
+            `CREATED_BY`,
+            `LAST_UPDATE_DATE`,
+            `LAST_UPDATED_BY`
+        FROM `FND_DATA_DICT`
+
+        ${wheresql}
+
+    </select>
+
+    <select id="querySubList" parameterType="java.lang.Long" resultType="map">
+
+        SELECT
+            `FND_DATA_DICT_ID`,
+            `PRIMARY_KEY`,
+            `PRIMARY_VALUE`,
+            `SECONDARY_KEY`,
+            `SECONDARY_VALUE`,
+            `DISABLE`,
+            `ORDER_RANK`,
+            `PARANT_DATA_DICT_ID`,
+            `FILE_PATH_VALUE`,
+            `IMAGE_PATH_VALUE`,
+            `RICH_TEXT_VALUE`,
+            `CREATION_DATE`,
+            `CREATED_BY`,
+            `LAST_UPDATE_DATE`,
+            `LAST_UPDATED_BY`
+        FROM `FND_DATA_DICT`
+
+        where PARANT_DATA_DICT_ID = #{value}
+
+        order by ORDER_RANK ASC
+
+    </select>
+
+</mapper>

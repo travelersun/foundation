@@ -1,0 +1,124 @@
+spring:
+  application:
+    name: foundation
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://oracledb:3306/fnd?useUnicode=true&characterEncoding=utf8&useSSL=false   #mysql
+    username: root
+    password: 123456
+    name: fnd
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 5
+    min-idle: 5
+    max-active: 20
+    max-wait: 30000
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: select '1' from dual
+    test-while-idle: true
+    test-on-borrow: true
+    test-on-return: false
+    pool-prepared-statements: true
+    max-open-prepared-statements: 20
+    max-pool-prepared-statement-per-connection-size: 20
+    filters: stat,wall,slf4j
+    druid:
+      stat-view-servlet:
+        allow: /*
+        reset-enable: true
+        login-username: admin
+        login-password: admin
+      web-stat-filter:
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://192.168.1.104/uaa/token_keys
+          issuer-uri: http://localhost:8080/uaa/oauth/token
+      client:
+        registration:
+          app:
+            provider: uaa
+            client-id: app
+            client-secret: appclientsecret
+            authorization-grant-type: authorization_code
+            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+            #scope: cloud_controller.read,cloud_controller.write,openid,password.write,scim.userids,organizations.acme,admin #openid,profile,email,resource.read
+        provider:
+          uaa:
+            authorization-uri: http://192.168.1.104/uaa/oauth/authorize
+            token-uri: http://192.168.1.104/uaa/oauth/token
+            user-info-uri: http://192.168.1.104/uaa/userinfo
+            user-name-attribute: user_name #sub
+            jwk-set-uri: http://192.168.1.104/uaa/token_keys
+  flyway:
+    enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    joda-date-time-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  gson:
+    date-format: yyyy-MM-dd HH:mm:ss
+  mvc:
+    date-format: yyyy-MM-dd HH:mm:ss
+  webflux:
+    date-format: yyyy-MM-dd HH:mm:ss
+server:
+  port: 8350
+  servlet:
+    session:
+      cookie:
+        name: fsession
+        path: /fnd
+    context-path: /fnd
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://192.168.1.104:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    root: DEBUG
+
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-uri: http://192.168.1.104/uaa/token_keys
+
+idcenter:
+  server-name: idcenter
+  url: http://idcenter/idcenter
+  minDuration: 600000
+  maxDuration: 900000
+
+
+# Mybatis-Plus Config http://mp.baomidou.com/#/spring-boot
+mybatis-plus:
+  mapper-locations: classpath*:mapper/mysql/**/*.xml
+  typeAliasesPackage: com.tianzhu.foundation.module
+  global-config:
+    id-type: 2
+    field-strategy: 0
+    db-column-underline: true
+    refresh-mapper: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+
+#pagehelper分页插件配置
+pagehelper:
+  helperDialect: mysql #设置sql语言
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+mybatis:
+  mapper-locations:
+    - classpath*:mapper/mysql/**/*.xml
+  type-aliases-package: com.tianzhu.foundation.module

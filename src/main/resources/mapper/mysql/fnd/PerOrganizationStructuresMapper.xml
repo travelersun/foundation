@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.PerOrganizationStructuresMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT
+            `ORGANIZATION_STRUCTURE_ID`,
+            `BUSINESS_GROUP_ID`,
+            `NAME`,
+            `PRIMARY_STRUCTURE_FLAG`,
+            `REQUEST_ID`,
+            `PROGRAM_APPLICATION_ID`,
+            `PROGRAM_ID`,
+            `PROGRAM_UPDATE_DATE`,
+            `ATTRIBUTE_CATEGORY`,
+            `ATTRIBUTE1`,
+            `ATTRIBUTE2`,
+            `ATTRIBUTE3`,
+            `ATTRIBUTE4`,
+            `ATTRIBUTE5`,
+            `ATTRIBUTE6`,
+            `ATTRIBUTE7`,
+            `ATTRIBUTE8`,
+            `ATTRIBUTE9`,
+            `ATTRIBUTE10`,
+            `ATTRIBUTE11`,
+            `ATTRIBUTE12`,
+            `ATTRIBUTE13`,
+            `ATTRIBUTE14`,
+            `ATTRIBUTE15`,
+            `ATTRIBUTE16`,
+            `ATTRIBUTE17`,
+            `ATTRIBUTE18`,
+            `ATTRIBUTE19`,
+            `ATTRIBUTE20`,
+            `POSITION_CONTROL_STRUCTURE_FLG`,
+            `OBJECT_VERSION_NUMBER`,
+            `LAST_UPDATE_DATE`,
+            `LAST_UPDATED_BY`,
+            `CREATED_BY`,
+            `CREATION_DATE`,
+            `COMMENTS`,
+            `DATE_FROM`,
+            `DATE_TO`,
+            `VERSION_NUMBER`
+        FROM `PER_ORGANIZATION_STRUCTURES`
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

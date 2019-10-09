@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndLookupTypesMapper">
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+        SELECT * from
+        (
+            SELECT
+                a.`APPLICATION_ID`,
+                b.`APPLICATION_SHORT_NAME`,
+                a.`LOOKUP_TYPE`,
+                a.`SECURITY_GROUP_ID`,
+                a.`VIEW_APPLICATION_ID`,
+                a.`CUSTOMIZATION_LEVEL`,
+                a.`ASSIGN_LEAF_ONLY`,
+                a.`DESCRIPTION`,
+                a.`CREATED_BY`,
+                a.`CREATION_DATE`,
+                a.`LAST_UPDATED_BY`,
+                a.`LAST_UPDATE_DATE`
+            FROM `FND_LOOKUP_TYPES` a , `FND_APPLICATION` b
+            where a.`APPLICATION_ID` = b.`APPLICATION_ID`
+
+        ) T
+
+        ${wheresql}
+
+    </select>
+
+</mapper>

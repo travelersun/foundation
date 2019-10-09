@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tianzhu.foundation.module.fnd.mapper.FndMenuEntriesMapper">
+
+    <select id="selectMenuEntriesByMenuId" parameterType="java.lang.Long" resultType="map">
+        select MENU_ID,ENTRY_SEQUENCE,SUB_MENU_ID,FUNCTION_ID
+        from FND_MENU_ENTRIES
+        where MENU_ID = #{value}
+        order by ENTRY_SEQUENCE
+    </select>
+
+    <select id="queryPageInfo" parameterType="map" resultType="map">
+
+        SELECT * FROM (
+            SELECT
+                a.`MENU_ID`,
+                a.`ENTRY_ID`,
+                a.`ENTRY_SEQUENCE`,
+                a.`SUB_MENU_ID`,
+                a.`FUNCTION_ID`,
+                a.`GRANT_FLAG`,
+                a.`LAST_UPDATE_DATE`,
+                a.`LAST_UPDATED_BY`,
+                a.`CREATION_DATE`,
+                a.`CREATED_BY`,
+                b.`MENU_CODE` as `SUB_MENU_CODE`,
+                b.`MENU_NAME` as `SUB_MENU_NAME`,
+                c.`FUNCTION_CODE` as `FUNCTION_CODE`,
+                c.`FUNCTION_NAME` as `FUNCTION_NAME`
+            FROM `FND_MENU_ENTRIES` a
+                 left join FND_MENUS b on a.SUB_MENU_ID = b.MENU_ID
+                 left join FND_FUNCTIONS c on a.FUNCTION_ID = c.FUNCTION_ID
+        ) T
+
+        ${wheresql}
+
+    </select>
+
+    <select id="querySubList" parameterType="java.lang.Long" resultType="map">
+
+        SELECT * FROM (
+            SELECT
+                a.`MENU_ID`,
+                a.`ENTRY_ID`,
+                a.`ENTRY_SEQUENCE`,
+                a.`SUB_MENU_ID`,
+                a.`FUNCTION_ID`,
+                a.`GRANT_FLAG`,
+                a.`LAST_UPDATE_DATE`,
+                a.`LAST_UPDATED_BY`,
+                a.`CREATION_DATE`,
+                a.`CREATED_BY`,
+                b.`MENU_CODE` as `SUB_MENU_CODE`,
+                b.`MENU_NAME` as `SUB_MENU_NAME`,
+                c.`FUNCTION_CODE` as `FUNCTION_CODE`,
+                c.`FUNCTION_NAME` as `FUNCTION_NAME`
+            FROM `FND_MENU_ENTRIES` a
+                 left join FND_MENUS b on a.SUB_MENU_ID = b.MENU_ID
+                 left join FND_FUNCTIONS c on a.FUNCTION_ID = c.FUNCTION_ID
+        ) T
+
+        where MENU_ID = #{value}
+        order by ENTRY_SEQUENCE ASC
+
+    </select>
+
+</mapper>
